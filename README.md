@@ -1,80 +1,97 @@
-# Food Delivery Django ORM Project
+# Ex01 Django ORM Web Application
+## Date: 
 
-## Project Structure
-```
-fooddelivery/
-├── manage.py
-├── populate_db.py
-├── fooddelivery/
-│   ├── __init__.py
-│   ├── settings.py
-│   ├── urls.py
-│   └── wsgi.py
-└── myapp/
-    ├── __init__.py
-    ├── apps.py
-    ├── admin.py
-    ├── models.py
-    ├── views.py
-    ├── urls.py
-    ├── migrations/
-    │   ├── __init__.py
-    │   └── 0001_initial.py
-    └── templates/
-        └── myapp/
-            └── index.html
-```
+## AIM
+To develop a Django application to manage an online food delivery platform like Zomato/Swiggy using Object Relational Mapping (ORM).
 
-## Setup & Run Instructions
+## ENTITY RELATIONSHIP DIAGRAM
 
-### Step 1: Install Django
-```bash
-python -m pip install django
-```
 
-### Step 2: Apply Migrations
-```bash
-python manage.py makemigrations
-python manage.py migrate
-```
 
-### Step 3: Populate Database
-```bash
-python populate_db.py
-```
+## DESIGN STEPS
 
-### Step 4: Run the Server
-```bash
-python manage.py runserver
-```
+### STEP 1:
+Clone the problem from GitHub
 
-### Step 5: Open in Browser
-- **Home page (orders list):** http://127.0.0.1:8000/
-- **Admin panel:**             http://127.0.0.1:8000/admin/
+### STEP 2:
+Create a new app in Django project
 
-## Model Fields (food_delivery_db)
-| Field           | Type         | Description           |
-|-----------------|--------------|-----------------------|
-| order_id        | AutoField    | Primary Key           |
-| customername    | CharField    | Customer's name       |
-| orderdate       | DateField    | Date of order         |
-| itemname        | CharField    | Food item ordered     |
-| orderqty        | IntegerField | Quantity ordered      |
-| unitprice       | FloatField   | Price per item        |
-| totalamount     | FloatField   | Total order amount    |
-| deliveryaddress | CharField    | Delivery location     |
+### STEP 3:
+Enter the code for admin.py and models.py
 
-## Sample Data (10 Records — May 6, 2026)
-| #  | Customer  | Item           | Price  | Address      |
-|----|-----------|----------------|--------|--------------|
-| 1  | gokul     | pasta          | ₹50    | chennai      |
-| 2  | dhanush   | biriyani       | ₹120   | chennai      |
-| 3  | vimal     | parotta        | ₹45    | chennai      |
-| 4  | hari      | fried rice     | ₹90    | chennai      |
-| 5  | mahith    | egg omelete    | ₹30    | chennai      |
-| 6  | pareesh   | egg roast dosa | ₹50    | chennai      |
-| 7  | chaitanya | idly sambar    | ₹30    | chennai      |
-| 8  | sushanth  | kadai rice     | ₹100   | chennai      |
-| 9  | varathan  | poori          | ₹50    | chennai      |
-| 10 | ranji     | chappathi      | ₹40    | cherrukannur |
+### STEP 4:
+Execute Django admin and create details for 10 books
 
+## PROGRAM
+
+~~~
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Delivery App</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: #f4f4f4; }
+        header { background: #1a6e3f; color: white; padding: 15px 30px; }
+        header h1 { font-size: 24px; }
+        .container { max-width: 1200px; margin: 30px auto; padding: 0 20px; }
+        h2 { margin-bottom: 15px; color: #333; }
+        table { width: 100%; border-collapse: collapse; background: white; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+        th { background: #1a6e3f; color: white; padding: 12px 15px; text-align: left; font-size: 13px; }
+        td { padding: 10px 15px; border-bottom: 1px solid #eee; font-size: 14px; }
+        tr:hover { background: #f9f9f9; }
+        .badge { display: inline-block; background: #e0f7ea; color: #1a6e3f; padding: 2px 8px; border-radius: 12px; font-size: 12px; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🍽️ Food Delivery Platform</h1>
+    </header>
+    <div class="container">
+        <h2>All Orders ({{ orders.count }} records)</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ORDER ID</th>
+                    <th>CUSTOMER NAME</th>
+                    <th>ORDER DATE</th>
+                    <th>ITEM NAME</th>
+                    <th>ORDER QTY</th>
+                    <th>UNIT PRICE</th>
+                    <th>TOTAL AMOUNT</th>
+                    <th>DELIVERY ADDRESS</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                <tr>
+                    <td>{{ order.order_id }}</td>
+                    <td>{{ order.customername }}</td>
+                    <td>{{ order.orderdate }}</td>
+                    <td>{{ order.itemname }}</td>
+                    <td>{{ order.orderqty }}</td>
+                    <td>₹{{ order.unitprice }}</td>
+                    <td><span class="badge">₹{{ order.totalamount }}</span></td>
+                    <td>{{ order.deliveryaddress }}</td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="8" style="text-align:center;padding:20px;">No orders found.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+
+~~~
+
+## OUTPUT
+
+<img width="1859" height="957" alt="Screenshot 2026-05-31 214153" src="https://github.com/user-attachments/assets/799cbab3-35d0-469e-af0d-49d76c0e5552" />
+
+
+## RESULT
+Thus the program for creating a database using ORM hass been executed successfully
+<img width="1859" height="957" alt="Screenshot 2026-05-31 214153" src="https://github.com/user-attachments/assets/5578ec09-8fe8-410e-907f-dabbe0db672c" />
