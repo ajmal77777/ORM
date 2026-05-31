@@ -1,97 +1,80 @@
-# Ex01 Django ORM Web Application
+# Food Delivery Django ORM Project
 
-**Date:** 21/05/2025
-
----
-
-## AIM
-
-To develop a Django Application to store and retrieve data from an E-Commerce Website Database for Amazon or Flipkart using Object Relational Mapping (ORM).
-
----
-
-## DESIGN STEPS
-
-### STEP 1
-Clone the project from GitHub.
-
-### STEP 2
-Create a new app in the Django project.
-
-### STEP 3
-Enter the code for `admin.py` and `models.py`.
-
-### STEP 4
-Detect changes and create migration files that describe how to modify the database schema.
-
-### STEP 5
-Execute the migration files and update the database schema to match the Django models.
-
-### STEP 6
-Create a superuser with full access rights to all models and data through the admin interface.
-
-### STEP 7
-Apply the migration files of the created app to the database.
-
-### STEP 8
-Execute Django admin using localhost and create details for 10 entries.
-
----
-
-# PROGRAM
-
-## models.py
-
-```python
-from django.db import models
-
-class FoodOrder(models.Model):
-    Order_ID = models.IntegerField(primary_key=True)
-    CustomerName = models.CharField(max_length=50)
-    RestaurantName = models.CharField(max_length=50)
-    FoodItem = models.CharField(max_length=100)
-    Quantity = models.IntegerField()
-    Price = models.FloatField()
-    DeliveryAddress = models.CharField(max_length=200)
-    OrderStatus = models.CharField(max_length=30)
-
-    def __str__(self):
-        return self.CustomerName
+## Project Structure
+```
+fooddelivery/
+├── manage.py
+├── populate_db.py
+├── fooddelivery/
+│   ├── __init__.py
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+└── myapp/
+    ├── __init__.py
+    ├── apps.py
+    ├── admin.py
+    ├── models.py
+    ├── views.py
+    ├── urls.py
+    ├── migrations/
+    │   ├── __init__.py
+    │   └── 0001_initial.py
+    └── templates/
+        └── myapp/
+            └── index.html
 ```
 
----
+## Setup & Run Instructions
 
-## admin.py
-
-```python
-from django.contrib import admin
-from .models import FoodOrder
-
-class FoodOrderAdmin(admin.ModelAdmin):
-    list_display = (
-        'Order_ID',
-        'CustomerName',
-        'RestaurantName',
-        'FoodItem',
-        'Quantity',
-        'Price',
-        'DeliveryAddress',
-        'OrderStatus'
-    )
-
-admin.site.register(FoodOrder, FoodOrderAdmin)
+### Step 1: Install Django
+```bash
+python -m pip install django
 ```
 
----
+### Step 2: Apply Migrations
+```bash
+python manage.py makemigrations
+python manage.py migrate
+```
 
-# OUTPUT
+### Step 3: Populate Database
+```bash
+python populate_db.py
+```
 
-<img width="1027" height="497" alt="Screenshot 2026-05-21 103043" src="https://github.com/user-attachments/assets/d35567d6-d354-45c9-8af5-213d6d4ef33d" />
+### Step 4: Run the Server
+```bash
+python manage.py runserver
+```
 
+### Step 5: Open in Browser
+- **Home page (orders list):** http://127.0.0.1:8000/
+- **Admin panel:**             http://127.0.0.1:8000/admin/
 
+## Model Fields (food_delivery_db)
+| Field           | Type         | Description           |
+|-----------------|--------------|-----------------------|
+| order_id        | AutoField    | Primary Key           |
+| customername    | CharField    | Customer's name       |
+| orderdate       | DateField    | Date of order         |
+| itemname        | CharField    | Food item ordered     |
+| orderqty        | IntegerField | Quantity ordered      |
+| unitprice       | FloatField   | Price per item        |
+| totalamount     | FloatField   | Total order amount    |
+| deliveryaddress | CharField    | Delivery location     |
 
----
+## Sample Data (10 Records — May 6, 2026)
+| #  | Customer  | Item           | Price  | Address      |
+|----|-----------|----------------|--------|--------------|
+| 1  | gokul     | pasta          | ₹50    | chennai      |
+| 2  | dhanush   | biriyani       | ₹120   | chennai      |
+| 3  | vimal     | parotta        | ₹45    | chennai      |
+| 4  | hari      | fried rice     | ₹90    | chennai      |
+| 5  | mahith    | egg omelete    | ₹30    | chennai      |
+| 6  | pareesh   | egg roast dosa | ₹50    | chennai      |
+| 7  | chaitanya | idly sambar    | ₹30    | chennai      |
+| 8  | sushanth  | kadai rice     | ₹100   | chennai      |
+| 9  | varathan  | poori          | ₹50    | chennai      |
+| 10 | ranji     | chappathi      | ₹40    | cherrukannur |
 
-# RESULT
-
-Thus, the program for creating an E-Commerce website database using Django ORM has been executed successfully.
